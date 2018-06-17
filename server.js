@@ -43,7 +43,7 @@ app.post('/posts', function(req, res){
   //var postText = req.body.text;
   Post.create({ text:req.body.text, comments:[]}, function (error, data){
      if(error) throw error
-     else  res.send(data);
+     else  res.send(data);// send what ???
   })
 });
  

@@ -9,24 +9,43 @@ class PostsRepository {
     }
 
     addPost(postText) {
-         _this.posts.push(data);
-    };
+        let _this = this;
+
+        return $.ajax ({
+            method: "POST",
+            url: '/posts',
+            data: {text: postText, comments: []},//aller
+            success: function(data) {//retour
+                _this.posts.push(data);
+            }
+        })
             
-    
+    };
 
     removePost(index) {
-       _this.posts.splice(index, 1);
+        let _this = this;
+        let postId = this.posts[index]._id;
+
+        return $.ajax({
+            type: "DELETE",
+            url: '/posts/'+ postId,
+            success: function(){
+              _this.posts.splice(index, 1);
+            }
+        })
     };
-    
-    
+        
     
     addComment(newComment, postIndex) {
-        this.posts[postIndex].comments.push(newComment);
+        
+                _this.posts[postIndex].comments.push(newComment);
+
     };
 
     deleteComment(postIndex, commentIndex) {
-        this.posts[postIndex].comments.splice(commentIndex, 1);
-      };
+               _this.posts[postIndex].comments.splice(commentIndex, 1);
+            
+    };
 
     
 }
